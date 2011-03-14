@@ -19,6 +19,13 @@
 @implementation LolayGridViewCell
 
 @dynamic highlighted;
+@synthesize reuseIdentifier;
+@synthesize uuid;
+@synthesize rowIndex;
+@synthesize columnIndex;
+@synthesize highlightedValue;
+@synthesize backgroundView;
+@synthesize delegate;
 
 #pragma mark -
 #pragma mark View Lifecycle

@@ -22,6 +22,18 @@
 
 @implementation LolayGridView
 
+@synthesize inUseGridCells;
+@synthesize reusableGridCells;
+@synthesize reloadLock;
+@synthesize handleCellsLock;
+@synthesize loadedOnce;
+@synthesize numberOfRows;
+@synthesize numberOfColumns;
+@synthesize heightForRows;
+@synthesize widthForColumns;
+@synthesize dataSource;
+@synthesize delegate;
+
 #pragma mark -
 #pragma mark View Lifecycle
 
