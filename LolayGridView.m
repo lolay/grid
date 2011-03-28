@@ -40,9 +40,9 @@
 - (void) setup {
 	self.inUseGridCells = [NSMutableSet set];
 	self.reusableGridCells = [NSMutableSet set];
-	self.reloadLock = [NSLock new];
+	self.reloadLock = [[NSLock new] autorelease];
 	self.reloadLock.name = @"LolayGridView.reloadLock";
-	self.handleCellsLock = [NSLock new];
+	self.handleCellsLock = [[NSLock new] autorelease];
 	self.handleCellsLock.name = @"LolayGridView.handleCellsLock";
 	self.loadedOnce = NO;
 	self.numberOfRows = 0;
