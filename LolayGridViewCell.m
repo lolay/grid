@@ -26,6 +26,7 @@
 @synthesize highlightedValue = highlightedValue_;
 @synthesize backgroundView = backgroundView_;
 @synthesize delegate = delegate_;
+@synthesize isHighlightable = isHighlightable_;
 
 #pragma mark -
 #pragma mark View Lifecycle
@@ -43,7 +44,7 @@
 		self.backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		self.backgroundView.opaque = NO;
 		[self addSubview:self.backgroundView];
-		
+		self.isHighlightable = YES;
 		[self prepareForReuse];
 	}
 	
@@ -111,7 +112,7 @@
 }
 
 - (void) touchesBegan:(NSSet*)touches withEvent:(UIEvent*) event {
-	if (! self.highlighted) {
+	if (! self.highlighted && self.isHighlightable) {
 		[self setHighlighted:YES animated:NO];
 	}
 	[super touchesBegan:touches withEvent:event];

@@ -13,6 +13,7 @@
 @property (nonatomic, assign) BOOL highlighted;
 @property (nonatomic, assign) IBOutlet id<LolayGridViewCellDelegate> delegate;
 @property (nonatomic, readonly, retain) NSString* uuid;
+@property (nonatomic) BOOL isHighlightable;
 
 - (id) initWithFrame:(CGRect) inRect reuseIdentifier:(NSString*) inReuseIdentifier;
 - (id) initWithReuseIdentifier:(NSString*) inReuseIdentifier;
