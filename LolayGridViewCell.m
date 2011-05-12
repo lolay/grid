@@ -131,7 +131,11 @@
 		if ([self.delegate respondsToSelector:@selector(didSelectGridCell:)]) {
 			[self.delegate didSelectGridCell:self];
 		}
-	}
+	} else if (!self.isHighlightable) {
+		if ([self.delegate respondsToSelector:@selector(didSelectGridCell:)]) {
+			[self.delegate didSelectGridCell:self];
+		}        
+    }
 	[super touchesEnded:touches withEvent:event];
 }
 
