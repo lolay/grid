@@ -392,6 +392,20 @@
 	}
 }
 
+- (void) clearAllCells {
+    NSLog(@"[LolayGridView clearAllCells] enter");
+    self.numberOfRows = 0;
+	self.numberOfColumns = 0;
+    self.inUseGridCells = nil;
+    self.reusableGridCells = nil;
+    self.inUseGridCells = [NSMutableSet set];
+	self.reusableGridCells = [NSMutableSet set];
+    self.loadedOnce = NO;
+    for (UIView* view in self.subviews) {
+        [view removeFromSuperview];
+    }
+}
+
 #pragma mark -
 #pragma mark LolayGridViewCellDelegate Methods
 

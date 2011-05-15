@@ -24,4 +24,6 @@
 
 - (void) didReceiveMemoryWarning;
 
+- (void) clearAllCells;
+
 @end
