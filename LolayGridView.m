@@ -406,6 +406,26 @@
     }
 }
 
+
+- (LolayGridViewCell*) cellForTag:(NSInteger)tag {
+    LolayGridViewCell* foundCell = nil;
+    for (LolayGridViewCell* cell in self.inUseGridCells) {
+        if (cell.tag == tag) {
+            foundCell = [cell retain];
+            break;
+        }
+    }
+    
+    for (LolayGridViewCell* cell in self.reusableGridCells) {
+        if (cell.tag == tag) {
+            foundCell = [cell retain];
+            break;
+        }
+    }
+    
+    return [foundCell autorelease];
+}
+
 #pragma mark -
 #pragma mark LolayGridViewCellDelegate Methods
 

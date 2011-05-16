@@ -26,4 +26,6 @@
 
 - (void) clearAllCells;
 
+- (LolayGridViewCell*) cellForTag:(NSInteger)tag;
+
 @end
