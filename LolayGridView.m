@@ -366,6 +366,14 @@
 	self.numberOfColumns = [self dataSourceNumberOfColumns];
 	self.heightForRows = [self delegateHeightForRows];
 	self.widthForColumns = [self delegateWidthForColumns];
+    
+    if([self.inUseGridCells count] > 0){
+        for(LolayGridViewCell* cell in self.inUseGridCells){
+            [self reuseCell:cell];
+        }
+        [self.reusableGridCells unionSet:self.inUseGridCells];
+        self.inUseGridCells = [NSMutableSet set];
+    }
 	
 	[self handleContentSize];
 	[self handleCells];
