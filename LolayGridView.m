@@ -4,7 +4,6 @@
 //
 #import "LolayGridView.h"
 #import "LolayGridViewCell.h"
-#import "LolayTimer.h"
 
 @interface LolayGridView ()
 
@@ -257,9 +256,6 @@
 		return;
 	}
 	
-	LolayTimer* timer = [[LolayTimer alloc] initWithName:@"[LolayGridView handleCells]"];
-	[timer start];
-	
 	if ([self.handleCellsLock tryLock]) {
 		CGRect loadedRect = [self loadedContentRect];
 		NSLog(@"[LolayGridView handleCells] loadedRect=(%2f,%2f,%2f,%2f)", loadedRect.origin.x, loadedRect.origin.y, loadedRect.size.width, loadedRect.size.height);
@@ -351,10 +347,6 @@
 		}
 		[self.handleCellsLock unlock];
 	}
-	
-	[timer stop];
-	NSLog(@"[LolayGridView handleCells] exit timer.milliseconds=%@", [timer milliseconds]);
-	[timer release];
 }
 
 - (void) reloadData {
