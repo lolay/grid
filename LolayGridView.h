@@ -18,6 +18,8 @@
 
 - (LolayGridViewCell*) cellForRow:(NSInteger) gridRowIndex atColumn:(NSInteger) gridColumnIndex;
 
+- (void) scrollToRow:(NSInteger) gridRowIndex atColumn:(NSInteger) gridColumnIndex animated:(BOOL) animated;
+
 - (void) didSelectGridCell:(LolayGridViewCell*) gridCellView;
 
 - (void) reloadData;

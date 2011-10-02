@@ -193,6 +193,16 @@
 	return [foundCell autorelease];
 }
 
+- (void) scrollToRow:(NSInteger) gridRowIndex atColumn:(NSInteger) gridColumnIndex animated:(BOOL) animated {
+    CGRect lastVisibleRect;
+    CGPoint pt = self.contentOffset;
+    lastVisibleRect.size.height = self.heightForRows;
+    lastVisibleRect.origin.y = (self.heightForRows * gridRowIndex);
+    lastVisibleRect.size.width = self.widthForColumns;
+    lastVisibleRect.origin.x = (self.widthForColumns * gridColumnIndex);
+    [self scrollRectToVisible:lastVisibleRect animated:animated];
+}
+
 - (void) handleContentSize {
 	NSLog(@"[LolayGridView handleContentSize] enter");
 	NSInteger numRows = self.numberOfRows;
