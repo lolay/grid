@@ -15,6 +15,7 @@
 @property (nonatomic, readonly, retain) NSString* uuid;
 @property (nonatomic) BOOL isHighlightable;
 
+- (void) setupWithFrame:(CGRect) frame reuseIdentifier:(NSString*) reuseIdentifier;
 - (id) initWithFrame:(CGRect) inRect reuseIdentifier:(NSString*) inReuseIdentifier;
 - (id) initWithReuseIdentifier:(NSString*) inReuseIdentifier;
 

@@ -31,21 +31,25 @@
 #pragma mark -
 #pragma mark View Lifecycle
 
+- (void) setupWithFrame:(CGRect) frame reuseIdentifier:(NSString*) reuseIdentifier {
+	self.uuid = [NSString stringWithUUID];
+	NSLog(@"[LolayGridViewCell initWithFrame] uuid=%@", self.uuid);
+	self.reuseIdentifier = reuseIdentifier;
+	self.frame = frame;
+	self.backgroundView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)] autorelease];
+	self.backgroundView.backgroundColor = [UIColor blackColor];
+	self.backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	self.backgroundView.opaque = NO;
+	[self addSubview:self.backgroundView];
+	self.isHighlightable = YES;
+	[self prepareForReuse];
+}
+
 - (id) initWithFrame:(CGRect) inRect reuseIdentifier:(NSString*) inReuseIdentifier {
 	self = [super initWithFrame:inRect];
 	
 	if (self) {
-		self.uuid = [NSString stringWithUUID];
-		NSLog(@"[LolayGridViewCell initWithFrame] uuid=%@", self.uuid);
-		self.reuseIdentifier = inReuseIdentifier;
-		self.frame = inRect;
-		self.backgroundView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, inRect.size.width, inRect.size.height)] autorelease];
-		self.backgroundView.backgroundColor = [UIColor blackColor];
-		self.backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		self.backgroundView.opaque = NO;
-		[self addSubview:self.backgroundView];
-		self.isHighlightable = YES;
-		[self prepareForReuse];
+		[self setupWithFrame:inRect reuseIdentifier:inReuseIdentifier];
 	}
 	
 	return self;
