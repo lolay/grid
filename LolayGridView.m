@@ -39,9 +39,9 @@
 - (void) setup {
 	self.inUseGridCells = [NSMutableSet set];
 	self.reusableGridCells = [NSMutableSet set];
-	self.reloadLock = [[NSLock new] autorelease];
+	self.reloadLock = [NSLock new];
 	self.reloadLock.name = @"LolayGridView.reloadLock";
-	self.handleCellsLock = [[NSLock new] autorelease];
+	self.handleCellsLock = [NSLock new];
 	self.handleCellsLock.name = @"LolayGridView.handleCellsLock";
 	self.loadedOnce = NO;
 	self.numberOfRows = 0;
@@ -72,18 +72,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	NSLog(@"[LolayGridView dealloc] enter");
-	self.dataSource = nil;
-	self.delegate = nil;
-	self.reloadLock = nil;
-	self.handleCellsLock = nil;
-	self.inUseGridCells = nil;
-	self.reusableGridCells = nil;
-	
-	[super dealloc];
-}
-
 - (void) didReceiveMemoryWarning {
 	NSLog(@"[LolayGridView didReceiveMemoryWarning] enter");
 	[self.reusableGridCells removeAllObjects];
@@ -110,10 +98,10 @@
 
 - (LolayGridViewCell*) dataSourceCellForRow:(NSInteger) gridRowIndex atColumn:(NSInteger) gridColumnIndex {
 	if ([self.dataSource respondsToSelector:@selector(gridView:cellForRow:atColumn:)]) {
-		LolayGridViewCell* cell = [[self.dataSource gridView:self cellForRow:gridRowIndex atColumn:gridColumnIndex] retain];
+		LolayGridViewCell* cell = [self.dataSource gridView:self cellForRow:gridRowIndex atColumn:gridColumnIndex];
 		cell.delegate = self;
 		[cell setRow:gridRowIndex atColumn:gridColumnIndex];
-		return [cell autorelease];
+		return cell;
 	} else {
 		return nil;
 	}
@@ -171,13 +159,13 @@
 	
 	for (LolayGridViewCell* cell in self.reusableGridCells) {
 		if ([cell.reuseIdentifier isEqualToString:identifier]) {
-			foundCell = [cell retain];
+			foundCell = cell;
 			[self.reusableGridCells removeObject:cell];
 			break;
 		}
 	}
 	
-	return [foundCell autorelease];
+	return foundCell;
 }
 
 - (LolayGridViewCell*) cellForRow:(NSInteger) gridRowIndex atColumn:(NSInteger) gridColumnIndex {
@@ -185,12 +173,12 @@
 	
 	for (LolayGridViewCell* cell in self.inUseGridCells) {
 		if (cell.rowIndex == gridRowIndex && cell.columnIndex == gridColumnIndex) {
-			foundCell = [cell retain];
+			foundCell = cell;
 			break;
 		}
 	}
 	
-	return [foundCell autorelease];
+	return foundCell;
 }
 
 - (void) scrollToRow:(NSInteger) gridRowIndex atColumn:(NSInteger) gridColumnIndex animated:(BOOL) animated {
@@ -271,7 +259,7 @@
 		NSLog(@"[LolayGridView handleCells] loadedRect=(%2f,%2f,%2f,%2f)", loadedRect.origin.x, loadedRect.origin.y, loadedRect.size.width, loadedRect.size.height);
 		
 		// Reclaim some cells
-		NSMutableSet* reuseSet = [[NSMutableSet setWithCapacity:self.inUseGridCells.count / 2] retain];
+		NSMutableSet* reuseSet = [NSMutableSet setWithCapacity:self.inUseGridCells.count / 2];
 		for (LolayGridViewCell* cell in self.inUseGridCells) {
 			if (! CGRectIntersectsRect(loadedRect, cell.frame)) {
 				NSLog(@"[LolayGridView handleCells] reusing cell uuid=%@, row=%i column=%i", cell.uuid, cell.rowIndex, cell.columnIndex);
@@ -281,7 +269,6 @@
 		}
 		[self.inUseGridCells minusSet:reuseSet];
 		[self.reusableGridCells unionSet:reuseSet];
-		[reuseSet release];
 		
 		// Load some missing cells
 		CGFloat rowHeight = self.heightForRows;
@@ -345,13 +332,12 @@
 				}
 				
 				if (! [self cellForRow:offsetRow atColumn:offsetColumn]) {
-					LolayGridViewCell* cell = [[self dataSourceCellForRow:offsetRow atColumn:offsetColumn] retain];
+					LolayGridViewCell* cell = [self dataSourceCellForRow:offsetRow atColumn:offsetColumn];
 					if (cell) {
 						cell.frame = CGRectMake(insetForRow + offsetColumn * columnWidth, insetForColumn + offsetRow * rowHeight, columnWidth, rowHeight);
 						[self addSubview:cell];
 						[self.inUseGridCells addObject:cell];
 					}
-					[cell release];
 				}
 			}
 		}
@@ -421,19 +407,19 @@
     LolayGridViewCell* foundCell = nil;
     for (LolayGridViewCell* cell in self.inUseGridCells) {
         if (cell.tag == tag) {
-            foundCell = [cell retain];
+            foundCell = cell;
             break;
         }
     }
     
     for (LolayGridViewCell* cell in self.reusableGridCells) {
         if (cell.tag == tag) {
-            foundCell = [cell retain];
+            foundCell = cell;
             break;
         }
     }
     
-    return [foundCell autorelease];
+    return foundCell;
 }
 
 #pragma mark -

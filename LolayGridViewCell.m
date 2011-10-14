@@ -36,7 +36,7 @@
 	NSLog(@"[LolayGridViewCell initWithFrame] uuid=%@", self.uuid);
 	self.reuseIdentifier = reuseIdentifier;
 	self.frame = frame;
-	self.backgroundView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)] autorelease];
+	self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
 	self.backgroundView.backgroundColor = [UIColor blackColor];
 	self.backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.backgroundView.opaque = NO;
@@ -57,15 +57,6 @@
 
 - (id) initWithReuseIdentifier:(NSString*) inReuseIdentifier {
 	return [self initWithFrame:CGRectZero reuseIdentifier:inReuseIdentifier];
-}
-
-- (void) dealloc {
-	self.delegate = nil;
-	self.uuid = nil;
-	self.reuseIdentifier = nil;
-	self.backgroundView = nil;
-	
-	[super dealloc];
 }
 
 - (void) prepareForReuse {
