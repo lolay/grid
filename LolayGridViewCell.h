@@ -7,12 +7,12 @@
 
 @interface LolayGridViewCell : UIView
 
-@property (nonatomic, readonly, retain) NSString* reuseIdentifier;
+@property (nonatomic, readonly, strong) NSString* reuseIdentifier;
 @property (nonatomic, readonly) NSInteger rowIndex;
 @property (nonatomic, readonly) NSInteger columnIndex;
 @property (nonatomic, assign) BOOL highlighted;
-@property (nonatomic, assign) IBOutlet id<LolayGridViewCellDelegate> delegate;
-@property (nonatomic, readonly, retain) NSString* uuid;
+@property (nonatomic, unsafe_unretained) IBOutlet id<LolayGridViewCellDelegate> delegate;
+@property (nonatomic, readonly, strong) NSString* uuid;
 @property (nonatomic) BOOL isHighlightable;
 
 - (void) setupWithFrame:(CGRect) frame reuseIdentifier:(NSString*) reuseIdentifier;

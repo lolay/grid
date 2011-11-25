@@ -12,7 +12,7 @@
 @property (nonatomic) NSInteger rowIndex;
 @property (nonatomic) NSInteger columnIndex;
 @property (nonatomic) BOOL highlightedValue;
-@property (nonatomic, retain) UIView* backgroundView;
+@property (nonatomic, strong) UIView* backgroundView;
 
 @end
 

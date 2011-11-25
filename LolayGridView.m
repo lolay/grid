@@ -7,10 +7,10 @@
 
 @interface LolayGridView ()
 
-@property (nonatomic, retain) NSMutableSet* inUseGridCells; // LolayGridViewCell*
-@property (nonatomic, retain) NSMutableSet* reusableGridCells; // LolayGridViewCell*
-@property (nonatomic, retain) NSLock* reloadLock;
-@property (nonatomic, retain) NSLock* handleCellsLock;
+@property (nonatomic, strong) NSMutableSet* inUseGridCells; // LolayGridViewCell*
+@property (nonatomic, strong) NSMutableSet* reusableGridCells; // LolayGridViewCell*
+@property (nonatomic, strong) NSLock* reloadLock;
+@property (nonatomic, strong) NSLock* handleCellsLock;
 @property (nonatomic) BOOL loadedOnce;
 @property (nonatomic) NSInteger numberOfRows;
 @property (nonatomic) NSInteger numberOfColumns;

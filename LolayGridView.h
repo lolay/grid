@@ -9,8 +9,8 @@
 
 @interface LolayGridView : UIScrollView <LolayGridViewCellDelegate>
 
-@property (nonatomic, assign) IBOutlet id<LolayGridViewDataSource> dataSource;
-@property (nonatomic, assign) IBOutlet id<LolayGridViewDelegate> delegate;
+@property (nonatomic, unsafe_unretained) IBOutlet id<LolayGridViewDataSource> dataSource;
+@property (nonatomic, unsafe_unretained) IBOutlet id<LolayGridViewDelegate> delegate;
 @property (nonatomic, readonly) NSInteger numberOfRows;
 @property (nonatomic, readonly) NSInteger numberOfColumns;
 
