@@ -7,8 +7,8 @@
 
 @interface LolayGridViewCell ()
 
-@property (nonatomic, retain) IBOutlet NSString* reuseIdentifier;
-@property (nonatomic, retain) NSString* uuid;
+@property (nonatomic, strong) IBOutlet NSString* reuseIdentifier;
+@property (nonatomic, strong) NSString* uuid;
 @property (nonatomic) NSInteger rowIndex;
 @property (nonatomic) NSInteger columnIndex;
 @property (nonatomic) BOOL highlightedValue;
