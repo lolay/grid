@@ -33,7 +33,7 @@
 
 - (void) setupWithFrame:(CGRect) frame reuseIdentifier:(NSString*) reuseIdentifier {
 	self.uuid = [NSString stringWithUUID];
-	NSLog(@"[LolayGridViewCell initWithFrame] uuid=%@", self.uuid);
+	DLog(@"[LolayGridViewCell initWithFrame] uuid=%@", self.uuid);
 	self.reuseIdentifier = reuseIdentifier;
 	self.frame = frame;
 	self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];

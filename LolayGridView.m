@@ -51,7 +51,7 @@
 }
 
 - (id) initWithCoder:(NSCoder*) decoder {
-	NSLog(@"[LolayGridView initWithCoder] enter");
+	DLog(@"[LolayGridView initWithCoder] enter");
 	self = [super initWithCoder:decoder];
 	
 	if (self) {
@@ -62,7 +62,7 @@
 }
 
 - (id) initWithFrame:(CGRect) inRect {
-	NSLog(@"[LolayGridView initWithFrame] enter");
+	DLog(@"[LolayGridView initWithFrame] enter");
 	self = [super initWithFrame:inRect];
 	
 	if (self) {
@@ -73,7 +73,7 @@
 }
 
 - (void) didReceiveMemoryWarning {
-	NSLog(@"[LolayGridView didReceiveMemoryWarning] enter");
+	DLog(@"[LolayGridView didReceiveMemoryWarning] enter");
 	[self.reusableGridCells removeAllObjects];
 }
 
@@ -192,7 +192,7 @@
 
 
 - (void) handleContentSize {
-	NSLog(@"[LolayGridView handleContentSize] enter");
+	DLog(@"[LolayGridView handleContentSize] enter");
 	NSInteger numRows = self.numberOfRows;
 	NSInteger numColumns = self.numberOfColumns;
 	
@@ -221,7 +221,7 @@
 	contentHeight += maxColumnInset;
 	
 	self.contentSize = CGSizeMake(contentWidth, contentHeight);
-	NSLog(@"[LolayGridView handleContentSize] exit self.content.size=(%2f,%2f)", contentWidth, contentHeight);
+	DLog(@"[LolayGridView handleContentSize] exit self.content.size=(%2f,%2f)", contentWidth, contentHeight);
 }
 
 - (CGRect) loadedContentRect {
@@ -245,7 +245,7 @@
 }
 
 - (void) handleCells {
-	NSLog(@"[LolayGridView handleCells] enter");
+	DLog(@"[LolayGridView handleCells] enter");
 	
 	NSInteger rows = self.numberOfRows;
 	NSInteger columns = self.numberOfColumns;
@@ -256,13 +256,13 @@
 	
 	if ([self.handleCellsLock tryLock]) {
 		CGRect loadedRect = [self loadedContentRect];
-		NSLog(@"[LolayGridView handleCells] loadedRect=(%2f,%2f,%2f,%2f)", loadedRect.origin.x, loadedRect.origin.y, loadedRect.size.width, loadedRect.size.height);
+		DLog(@"[LolayGridView handleCells] loadedRect=(%2f,%2f,%2f,%2f)", loadedRect.origin.x, loadedRect.origin.y, loadedRect.size.width, loadedRect.size.height);
 		
 		// Reclaim some cells
 		NSMutableSet* reuseSet = [NSMutableSet setWithCapacity:self.inUseGridCells.count / 2];
 		for (LolayGridViewCell* cell in self.inUseGridCells) {
 			if (! CGRectIntersectsRect(loadedRect, cell.frame)) {
-				NSLog(@"[LolayGridView handleCells] reusing cell uuid=%@, row=%i column=%i", cell.uuid, cell.rowIndex, cell.columnIndex);
+				DLog(@"[LolayGridView handleCells] reusing cell uuid=%@, row=%i column=%i", cell.uuid, cell.rowIndex, cell.columnIndex);
 				[self reuseCell:cell];
 				[reuseSet addObject:cell];
 			}
@@ -305,7 +305,7 @@
 			maxColumn = columns - 1;
 		}
 		
-		NSLog(@"[LolayGridView handleCells] (minRow,minColumn:maxRow,maxColumn)=(%i,%i:%i,%i)", minRow, minColumn, maxRow, maxColumn);
+		DLog(@"[LolayGridView handleCells] (minRow,minColumn:maxRow,maxColumn)=(%i,%i:%i,%i)", minRow, minColumn, maxRow, maxColumn);
 		
 		for (NSInteger row = minRow; row <= maxRow; row++) {
 			CGFloat insetForRow = [self delegateInsetForRow:row];
@@ -346,7 +346,7 @@
 }
 
 - (void) reloadData {
-	NSLog(@"[LolayGridView reloadData] enter");
+	DLog(@"[LolayGridView reloadData] enter");
 	self.loadedOnce = YES;
 	[self.reloadLock lock];
 	
@@ -389,7 +389,7 @@
 }
 
 - (void) clearAllCells {
-    NSLog(@"[LolayGridView clearAllCells] enter");
+    DLog(@"[LolayGridView clearAllCells] enter");
     self.numberOfRows = 0;
 	self.numberOfColumns = 0;
     self.inUseGridCells = nil;
@@ -426,7 +426,7 @@
 #pragma mark LolayGridViewCellDelegate Methods
 
 - (void) didSelectGridCell:(LolayGridViewCell*) gridCellView {
-	NSLog(@"[LolayGridView didSelectGridCell] enter");
+	DLog(@"[LolayGridView didSelectGridCell] enter");
 	if ([self.delegate respondsToSelector:@selector(gridView:didSelectCellAtRow:atColumn:)]) {
 		[self.delegate gridView:self didSelectCellAtRow:gridCellView.rowIndex atColumn:gridCellView.columnIndex];
 	}
@@ -436,7 +436,7 @@
 #pragma mark UIView Methods
 
 - (void) drawRect:(CGRect) rect {
-	NSLog(@"[LolayGridView drawRect] enter");
+	DLog(@"[LolayGridView drawRect] enter");
 	[super drawRect:rect];
 	if (! self.loadedOnce) {
 		[self reloadData];
