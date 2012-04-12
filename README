@@ -1,3 +1,2 @@
-A Grid View that was loosely based on the DTGridView but allows insets per row and column. In addition, it can be resized without
+A Grid View that was loosely based on the DTGridView but allows insets per row and column. This works similar to TableViewCell in that it supports the ability to enqueue and dequeue cells to preserve memory. In addition, it can be resized without
 reloading all data.
-This works similar to TableViewCell in that it supports the ability to enqueue and dequeue cells to preserve memory.
