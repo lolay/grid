@@ -21,6 +21,8 @@
 
 @protocol LolayGridViewDataSource <NSObject>
 
+@optional
+
 - (NSInteger) numberOfRowsInGridView:(LolayGridView*) gridView;
 - (NSInteger) numberOfColumnsInGridView:(LolayGridView*) gridView;
 - (LolayGridViewCell*) gridView:(LolayGridView*) gridView cellForRow:(NSInteger) gridRowIndex atColumn:(NSInteger) gridColumnIndex;
