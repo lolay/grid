@@ -25,6 +25,7 @@ typedef enum {
 } LolayGridViewEdge;
 
 @class LolayGridView;
+@class LolayGridViewCell;
 
 @protocol LolayGridViewDelegate <UIScrollViewDelegate>
 
@@ -39,5 +40,7 @@ typedef enum {
 - (void) gridView:(LolayGridView*) gridView didScrollToEdge:(LolayGridViewEdge) edge;
 
 - (void) gridView:(LolayGridView*) gridView didSelectCellAtRow:(NSInteger) gridRowIndex atColumn:(NSInteger) gridColumnIndex;
+
+- (void) gridView:(LolayGridView*) gridView cellWillAppear:(LolayGridViewCell*) cell row:(NSInteger) row column:(NSInteger) column;
 
 @end

@@ -347,6 +347,9 @@
 					LolayGridViewCell* cell = [self dataSourceCellForRow:offsetRow atColumn:offsetColumn];
 					if (cell) {
 						cell.frame = CGRectMake(insetForRow + offsetColumn * columnWidth, insetForColumn + offsetRow * rowHeight, columnWidth, rowHeight);
+						if ([self.delegate respondsToSelector:@selector(gridView:cellWillAppear:row:column:)]) {
+							[self.delegate gridView:self cellWillAppear:cell row:offsetRow column:offsetColumn];
+						}
 						[self addSubview:cell];
 						[self.inUseGridCells addObject:cell];
 					}
