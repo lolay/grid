@@ -19,7 +19,7 @@
 
 @interface LolayGridViewCell : UIView
 
-@property (nonatomic, readonly, strong) NSString* reuseIdentifier;
+@property (nonatomic, strong) NSString* reuseIdentifier;
 @property (nonatomic, readonly) NSInteger rowIndex;
 @property (nonatomic, readonly) NSInteger columnIndex;
 @property (nonatomic, assign) BOOL highlighted;

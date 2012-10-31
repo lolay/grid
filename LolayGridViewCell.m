@@ -19,7 +19,6 @@
 
 @interface LolayGridViewCell ()
 
-@property (nonatomic, strong) IBOutlet NSString* reuseIdentifier;
 @property (nonatomic, strong) NSString* uuid;
 @property (nonatomic) NSInteger rowIndex;
 @property (nonatomic) NSInteger columnIndex;
