@@ -43,7 +43,6 @@
 @synthesize heightForRows = heightForRows_;
 @synthesize widthForColumns = widthForColumns_;
 @synthesize dataSource = dataSource_;
-@synthesize delegate = delegate_;
 
 #pragma mark -
 #pragma mark View Lifecycle
