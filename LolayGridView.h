@@ -26,6 +26,9 @@
 @property (nonatomic, strong, readonly) NSMutableSet* inUseGridCells; // LolayGridViewCell*
 @property (nonatomic, readonly) NSInteger numberOfRows;
 @property (nonatomic, readonly) NSInteger numberOfColumns;
+@property (nonatomic) UIEdgeInsets contentBackgroundEdgeOutsets;
+@property (nonatomic) UIColor* contentBackgroundColor;
+@property (nonatomic) UIView* contentBackgroundView;
 
 - (LolayGridViewCell*) dequeueReusableGridCellWithIdentifier:(NSString*) identifier;
 

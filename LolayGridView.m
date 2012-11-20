@@ -88,6 +88,26 @@
 	[self.reusableGridCells removeAllObjects];
 }
 
+- (void) setContentBackgroundColor:(UIColor*) contentBackgroundColor {
+	_contentBackgroundColor = contentBackgroundColor;
+	if (self.contentBackgroundView) {
+		self.contentBackgroundView.backgroundColor = contentBackgroundColor;
+	} else {
+		CGSize contentSize = self.contentSize;
+		UIView* contentBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(contentSize.width > 0.0 ? -self.contentBackgroundEdgeOutsets.left : 0.0, contentSize.height > 0.0 ? -self.contentBackgroundEdgeOutsets.top : 0.0, contentSize.width > 0.0 ? contentSize.width + self.contentBackgroundEdgeOutsets.left + self.contentBackgroundEdgeOutsets.right : contentSize.width, contentSize.height > 0.0 ? contentSize.height + self.contentBackgroundEdgeOutsets.top + self.contentBackgroundEdgeOutsets.bottom : contentSize.height)];
+		contentBackgroundView.backgroundColor = contentBackgroundColor;
+		contentBackgroundView.opaque = YES;
+		contentBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+		self.contentBackgroundView = contentBackgroundView;
+	}
+}
+
+- (void) setContentBackgroundView:(UIView*) contentBackgroundView {
+	_contentBackgroundView = contentBackgroundView;
+	[self addSubview:contentBackgroundView];
+	[self sendSubviewToBack:contentBackgroundView];
+}
+						
 #pragma mark -
 #pragma mark LolayGridViewDataSource Calls
 
@@ -412,7 +432,9 @@
 	self.reusableGridCells = [NSMutableSet set];
     self.loadedOnce = NO;
     for (UIView* view in self.subviews) {
-        [view removeFromSuperview];
+		if (view != self.contentBackgroundView) {
+			[view removeFromSuperview];
+		}
     }
 }
 
@@ -461,6 +483,13 @@
 	[super layoutSubviews];
 	[self handleCells];
 	[self checkScrolledToEdge];
+}
+
+- (void) setContentSize:(CGSize) contentSize {
+	[super setContentSize:contentSize];
+	if (self.contentBackgroundView) {
+		self.contentBackgroundView.frame = CGRectMake(contentSize.width > 0.0 ? -self.contentBackgroundEdgeOutsets.left : 0.0, contentSize.height > 0.0 ? -self.contentBackgroundEdgeOutsets.top : 0.0, contentSize.width > 0.0 ? contentSize.width + self.contentBackgroundEdgeOutsets.left + self.contentBackgroundEdgeOutsets.right : contentSize.width, contentSize.height > 0.0 ? contentSize.height + self.contentBackgroundEdgeOutsets.top + self.contentBackgroundEdgeOutsets.bottom : contentSize.height);
+	}
 }
 
 @end
